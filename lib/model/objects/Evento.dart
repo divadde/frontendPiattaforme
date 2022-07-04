@@ -1,11 +1,13 @@
 //OK
+import 'Organizzatore.dart';
+
 class Evento {
   late int id; //todo vabene questo late?
   late String nome;
   late String citta;
   late int posti_occupati;
   late int massimo_posti;
-  late String organizzatore;
+  late Organizzatore organizzatore;
 
 
   Evento({required this.id, required this.nome, required this.citta, required this.posti_occupati,required this.massimo_posti, required this.organizzatore});
@@ -18,7 +20,7 @@ class Evento {
       citta: json['citta'],
       posti_occupati: json['posti_occupati'],
       massimo_posti: json['massimo_posti'],
-      organizzatore: json ['organizzatore'],
+      organizzatore: Organizzatore.fromJson(json['organizzatore']),
     );
   }
 

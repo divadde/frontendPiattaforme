@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:frontend_ticketstore/model/managers/RestManager.dart';
 import 'package:frontend_ticketstore/model/objects/AuthenticationData.dart';
 import 'package:frontend_ticketstore/model/objects/Evento.dart';
-import 'package:frontend_ticketstore/model/objects/User.dart';
+import 'package:frontend_ticketstore/model/objects/Utente.dart';
 import 'package:frontend_ticketstore/model/support/Constants.dart';
 import 'package:frontend_ticketstore/model/support/LogInResult.dart';
 
