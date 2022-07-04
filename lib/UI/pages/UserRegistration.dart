@@ -4,7 +4,7 @@ import 'package:frontend_ticketstore/model/Model.dart';
 import 'package:frontend_ticketstore/model/objects/Utente.dart';
 import 'package:flutter/material.dart';
 
-
+//non usata.
 class UserRegistration extends StatefulWidget {
   UserRegistration({Key? key}) : super(key: key);
 

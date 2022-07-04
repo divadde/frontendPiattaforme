@@ -7,7 +7,7 @@ import 'package:frontend_ticketstore/model/objects/Utente.dart';
 import 'package:frontend_ticketstore/model/support/Constants.dart';
 import 'package:frontend_ticketstore/model/support/LogInResult.dart';
 
-
+//todo aggiungi acquisto biglietto
 class Model {
   static Model sharedInstance = Model();
 
@@ -15,6 +15,7 @@ class Model {
   late AuthenticationData _authenticationData;
 
 
+  //ok
   Future<LogInResult> logIn(String email, String password) async {
     try{
       Map<String, String> params = Map();
@@ -37,7 +38,7 @@ class Model {
         }
       }
       _restManager.token = _authenticationData.accessToken;
-      Timer.periodic(Duration(seconds: (_authenticationData.expiresIn - 50)), (Timer t) {
+      Timer.periodic(Duration(seconds: (_authenticationData.expiresIn! - 50)), (Timer t) {
         _refreshToken();
       });
       return LogInResult.logged;
@@ -47,13 +48,14 @@ class Model {
     }
   }
 
+  //ok
   Future<bool> _refreshToken() async {
     try {
       Map<String, String> params = Map();
       params["grant_type"] = "refresh_token";
       params["client_id"] = Constants.CLIENT_ID;
       params["client_secret"] = Constants.CLIENT_SECRET;
-      params["refresh_token"] = _authenticationData.refreshToken;
+      params["refresh_token"] = _authenticationData.refreshToken!;
       String result = await _restManager.makePostRequest(Constants.ADDRESS_AUTHENTICATION_SERVER, Constants.REQUEST_LOGIN, params, type: TypeHeader.urlencoded);
       _authenticationData = AuthenticationData.fromJson(jsonDecode(result));
       if ( _authenticationData.hasError() ) {
@@ -67,13 +69,14 @@ class Model {
     }
   }
 
+  //ok
   Future<bool> logOut() async {
     try{
       Map<String, String> params = Map();
       _restManager.token = null;
       params["client_id"] = Constants.CLIENT_ID;
       params["client_secret"] = Constants.CLIENT_SECRET;
-      params["refresh_token"] = _authenticationData.refreshToken;
+      params["refresh_token"] = _authenticationData.refreshToken!;
       await _restManager.makePostRequest(Constants.ADDRESS_AUTHENTICATION_SERVER, Constants.REQUEST_LOGOUT, params, type: TypeHeader.urlencoded);
       return true;
     }
@@ -82,6 +85,7 @@ class Model {
     }
   }
 
+  //ok
   Future<List<Evento>> searchEvent(String nome) async {
     Map<String, String> params = Map();
     params["nome"] = nome;
@@ -89,6 +93,7 @@ class Model {
     return List<Evento>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_SEARCH_EVENTS, params)).map((i) => Evento.fromJson(i)).toList());
   }
 
+  //forse non serve
   Future<Utente> addUser(Utente user) async {
       String rawResult = await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
       /*if ( rawResult.contains(Constants.RESPONSE_ERROR_MAIL_USER_ALREADY_EXISTS) ) {
@@ -97,6 +102,8 @@ class Model {
        */
       return Utente.fromJson(jsonDecode(rawResult));
   }
+
+  //aggiungi acquisto biglietto
 
 
 }

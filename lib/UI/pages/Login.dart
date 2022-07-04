@@ -20,15 +20,17 @@ enum page{
 class _PersonalAreaState extends State<Login>{
   page p = page.login;
   late Response data;
-  TextEditingController _controllerUsername = TextEditingController();
+  TextEditingController _controllerMail = TextEditingController();
   TextEditingController _controllerPassword = TextEditingController();
 
   TextEditingController _RegcontrollerNome = TextEditingController();
   TextEditingController _RegcontrollerCogn = TextEditingController();
-  TextEditingController _RegcontrollerUser = TextEditingController();
+  TextEditingController _RegcontrollerMail = TextEditingController();
   TextEditingController _RegcontrollerPass = TextEditingController();
   TextEditingController _RegcontrollerCF = TextEditingController();
-  TextEditingController _RegcontrollerDataN = TextEditingController();
+  TextEditingController _RegcontrollerCitta = TextEditingController();
+  TextEditingController _RegcontrollerEta = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class _PersonalAreaState extends State<Login>{
                         fontStyle: FontStyle.italic,
                       ),
                     ),
-                    TextInputField(hint:"username", controller: _controllerUsername,submit: loginS),
+                    TextInputField(hint:"mail", controller: _controllerMail,submit: loginS),
                     TextInputField(hint:"password", controller: _controllerPassword,submit: loginS,),
                     IconButton( onPressed: login,
                       icon: Icon(Icons.login, size: 25,),),
@@ -87,7 +89,7 @@ class _PersonalAreaState extends State<Login>{
           children: [
             Opacity(
               opacity: 0.4,
-              child: Image.asset("images/homeImage.jpg",
+              child: Image.asset("images/homeImage.jpg", //todo immagine da sostituire
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.fitWidth ,
@@ -106,12 +108,13 @@ class _PersonalAreaState extends State<Login>{
                         fontStyle: FontStyle.italic,
                       ),
                     ),
-                    TextInputField(hint:"username",controller: _RegcontrollerUser,),
+                    TextInputField(hint:"mail",controller: _RegcontrollerMail,),
                     TextInputField(hint:"password",controller: _RegcontrollerPass,),
-                    TextInputField(hint: "nome",controller: _RegcontrollerNome,),
-                    TextInputField(hint: "cognome",controller: _RegcontrollerCogn,),
-                    TextInputField(hint: "codice fiscale", controller: _RegcontrollerCF),
-                    TextInputField(hint:"data di nascita: AAAA-MM-DD",controller: _RegcontrollerDataN,),
+                    TextInputField(hint:"nome",controller: _RegcontrollerNome,),
+                    TextInputField(hint:"cognome",controller: _RegcontrollerCogn,),
+                    TextInputField(hint:"codice fiscale", controller: _RegcontrollerCF),
+                    TextInputField(hint:"eta",controller: _RegcontrollerEta,),
+                    TextInputField(hint:"citta",controller: _RegcontrollerCitta,),
                     IconButton(
                       onPressed: registrati,
                       icon:  Icon(
@@ -130,14 +133,14 @@ class _PersonalAreaState extends State<Login>{
   }
 
   void registrati(){
-    //TODO
+    //TODO nick ha caricato il codice, vai a vedere
   }
 
   void loginS(String s){
     login();
   }
   void login()async{
-    LogInResult res = await Model.sharedInstance.logIn(_controllerUsername.text, _controllerPassword.text);
+    LogInResult res = await Model.sharedInstance.logIn(_controllerMail.text, _controllerPassword.text);
     LoginState.sharedInstance.setLoginState(res);
   }
 
