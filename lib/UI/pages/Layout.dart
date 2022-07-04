@@ -1,8 +1,10 @@
-import 'package:frontend_ticketstore/UI/pages/Home.dart';
 import 'package:frontend_ticketstore/UI/pages/Search.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/support/LogInResult.dart';
+import '../../model/support/LoginState.dart';
+import 'ListaBiglietti.dart';
+import 'Login.dart';
 
 //verifica correttezza todo
 class Layout extends StatefulWidget {
@@ -10,9 +12,9 @@ class Layout extends StatefulWidget {
 
   Layout({Key? key,required this.title}) : super(key: key);
 
-  static _LayoutState layout = _LayoutState(); //todo NICK
+  //static _LayoutState layout = _LayoutState(); //todo NICK
   @override
-  _LayoutState createState() => layout;
+  _LayoutState createState() => _LayoutState();
 
 }//Layout
 
@@ -29,7 +31,13 @@ class _LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
+      child: Scaffold( //todo Nick
+        floatingActionButton: FloatingActionButton(
+          child: Column(
+            children: const [Icon(Icons.logout), Text("logout")],
+          ),
+          onPressed: (){LoginState.sharedInstance.setLoginState(LogInResult.error_wrong_credentials);},
+        ),
         appBar: AppBar(
           backgroundColor: Colors.purple,
           shape: RoundedRectangleBorder(
@@ -47,12 +55,18 @@ class _LayoutState extends State<Layout> {
         ),
         body: TabBarView(
           children: [
-            Home(),
+            getChild(),
             Search(),
           ],
         ),
       ),
     );
+  }
+
+  StatefulWidget getChild(){
+    return LoginState.sharedInstance.getLoginState() != LogInResult.logged?
+    Login()
+        : ListaBiglietti();
   }
 
 }
