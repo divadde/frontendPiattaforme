@@ -1,11 +1,8 @@
 import 'package:frontend_ticketstore/UI/pages/Layout.dart';
 import 'package:frontend_ticketstore/model/support/Constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
 
 class App extends StatelessWidget {
-
 
   @override
   Widget build(BuildContext context) {

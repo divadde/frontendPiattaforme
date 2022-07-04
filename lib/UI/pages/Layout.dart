@@ -2,15 +2,17 @@ import 'package:frontend_ticketstore/UI/pages/Home.dart';
 import 'package:frontend_ticketstore/UI/pages/Search.dart';
 import 'package:flutter/material.dart';
 
-//OK
+import '../../model/support/LogInResult.dart';
+
+//verifica correttezza todo
 class Layout extends StatefulWidget {
   final String title;
 
-
   Layout({Key? key,required this.title}) : super(key: key);
 
+  static _LayoutState layout = _LayoutState(); //todo NICK
   @override
-  _LayoutState createState() => _LayoutState(title);
+  _LayoutState createState() => layout;
 
 }//Layout
 
@@ -18,7 +20,7 @@ class Layout extends StatefulWidget {
 class _LayoutState extends State<Layout> {
   String title = "";
 
-  _LayoutState(String title) {
+  _LayoutState() {
     this.title = title;
   }
 
@@ -39,7 +41,7 @@ class _LayoutState extends State<Layout> {
           bottom: TabBar(
             tabs: [
               Tab(text: "Home", icon: Icon(Icons.home_rounded)),
-              Tab(text: "Cerca", icon: Icon(Icons.search_rounded)),
+              Tab(text: "Cerca eventi", icon: Icon(Icons.search_rounded)),
             ],
           ),
         ),
@@ -52,6 +54,5 @@ class _LayoutState extends State<Layout> {
       ),
     );
   }
-
 
 }

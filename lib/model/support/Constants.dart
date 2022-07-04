@@ -4,8 +4,8 @@ class Constants {
   static final String APP_NAME = "TicketStore";
 
   // addresses
-  static final String ADDRESS_STORE_SERVER = "localhost:8080";
-  static final String ADDRESS_AUTHENTICATION_SERVER = "***";
+  static final String ADDRESS_STORE_SERVER = "localhost:9090";
+  static final String ADDRESS_AUTHENTICATION_SERVER = "localhost:8080";
 
   // authentication
   static final String REALM = "***";

@@ -86,18 +86,16 @@ class Model {
     Map<String, String> params = Map();
     params["nome"] = nome;
     print("Search eventi:" +nome);
-    //return await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_SEARCH_EVENTS,{"nome":nome});
     return List<Evento>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_SEARCH_EVENTS, params)).map((i) => Evento.fromJson(i)).toList());
   }
 
-
-  Future<User> addUser(User user) async {
+  Future<Utente> addUser(Utente user) async {
       String rawResult = await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
       /*if ( rawResult.contains(Constants.RESPONSE_ERROR_MAIL_USER_ALREADY_EXISTS) ) {
         return null; // not the best solution
       }
        */
-      return User.fromJson(jsonDecode(rawResult));
+      return Utente.fromJson(jsonDecode(rawResult));
   }
 
 
