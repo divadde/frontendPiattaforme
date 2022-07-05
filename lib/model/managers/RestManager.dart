@@ -25,10 +25,11 @@ class RestManager {
     print(value);
     print("body: ");
     print(body);
+    var response;
     while (true) {
       try {
         //print("inizio");
-        var response;
+        //var response;
         // setting content type
         String contentType = "application/json;charset=utf-8";
         dynamic formattedBody;
@@ -43,13 +44,18 @@ class RestManager {
         // setting headers
         Map<String, String> headers = Map();
         headers[HttpHeaders.contentTypeHeader] = contentType;
+        print("token: ");
+        print(token);
         if (token != null) {
           headers[HttpHeaders.authorizationHeader] = 'bearer $token';
         }
         // making request
         switch (method) {
           case "post":
-              print("pronto per la response");
+              print("pronto a postare");
+              print(uri);
+              print(headers);
+              print(formattedBody);
               response = await post(
                 uri,
                 headers: headers,
@@ -80,6 +86,7 @@ class RestManager {
           delegate!.errorNetworkGone();
           errorOccurred = false;
         }
+        print(response.toString());
         print("ricevo");
         return response.body;
       } catch (err) {
@@ -87,6 +94,7 @@ class RestManager {
           delegate!.errorNetworkOccurred(Constants.MESSAGE_CONNECTION_ERROR);
           errorOccurred = true;
         }
+        print(response.toString());
         print("errore");
         await Future.delayed(
             const Duration(seconds: 5), () => null); // not the best solution
