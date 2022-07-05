@@ -16,7 +16,7 @@ class RestManager {
 
 
   Future<String> _makeRequest(String serverAddress, String servicePath, String method, TypeHeader? type, {Map<String, String>? value, dynamic body}) async {
-    print("sono nel make Request");
+    print("sono nel makeRequest");
     Uri uri = Uri.http(serverAddress, servicePath, value);
     bool errorOccurred = false;
     print("Uri ottenuto: ");
@@ -27,7 +27,7 @@ class RestManager {
     print(body);
     while (true) {
       try {
-        print("inizio");
+        //print("inizio");
         var response;
         // setting content type
         String contentType = "application/json;charset=utf-8";
@@ -55,7 +55,7 @@ class RestManager {
                 headers: headers,
                 body: formattedBody,
               );
-              print("response ricevuta");
+              //print("response ricevuta");
             break;
           case "get":
               response = await get(
@@ -87,6 +87,7 @@ class RestManager {
           delegate!.errorNetworkOccurred(Constants.MESSAGE_CONNECTION_ERROR);
           errorOccurred = true;
         }
+        print("errore");
         await Future.delayed(
             const Duration(seconds: 5), () => null); // not the best solution
       }

@@ -11,8 +11,8 @@ class Constants {
   static final String REALM = "ticketstore-flutter";
   static final String CLIENT_ID = "ticketstore-flutter";
   static final String CLIENT_SECRET = "ld5PGgxa4X4KJok1dJEC8OtP8Jjm4Rif";
-  static final String REQUEST_LOGIN = "/auth/realms/" + REALM + "/protocol/openid-connect/token";
-  static final String REQUEST_LOGOUT = "/auth/realms/" + REALM + "/protocol/openid-connect/logout";
+  static final String REQUEST_LOGIN = "/realms/" + REALM + "/protocol/openid-connect/token";
+  static final String REQUEST_LOGOUT = "/realms/" + REALM + "/protocol/openid-connect/logout";
 
   // requests
   static final String REQUEST_SEARCH_EVENTS = "/eventi/byName";
