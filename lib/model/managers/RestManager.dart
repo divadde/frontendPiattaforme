@@ -90,6 +90,7 @@ class RestManager {
         print("ricevo");
         return response.body;
       } catch (err) {
+        print(err.toString());
         if (delegate != null && !errorOccurred) {
           delegate!.errorNetworkOccurred(Constants.MESSAGE_CONNECTION_ERROR);
           errorOccurred = true;
