@@ -19,8 +19,12 @@ class RestManager {
     print("sono nel make Request");
     Uri uri = Uri.http(serverAddress, servicePath, value);
     bool errorOccurred = false;
-    print("Uri ottenuto");
+    print("Uri ottenuto: ");
+    print(uri);
+    print("value: ");
     print(value);
+    print("body: ");
+    print(body);
     while (true) {
       try {
         print("inizio");
@@ -45,11 +49,13 @@ class RestManager {
         // making request
         switch (method) {
           case "post":
+              print("pronto per la response");
               response = await post(
                 uri,
                 headers: headers,
                 body: formattedBody,
               );
+              print("response ricevuta");
             break;
           case "get":
               response = await get(
@@ -88,6 +94,8 @@ class RestManager {
   }
 
   Future<String> makePostRequest(String serverAddress, String servicePath, dynamic value, {TypeHeader type = TypeHeader.json}) async {
+    print("nel postRequest:");
+    print(value);
     return _makeRequest(serverAddress, servicePath, "post", type, body: value);
   }
 

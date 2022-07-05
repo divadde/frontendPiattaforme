@@ -89,7 +89,7 @@ class _PersonalAreaState extends State<Login>{
           children: [
             Opacity(
               opacity: 0.4,
-              child: Image.asset("images/homeImage.jpg", //todo immagine da sostituire
+              child: Image.asset("images/homeImage.jpg",
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.fitWidth ,
@@ -133,13 +133,14 @@ class _PersonalAreaState extends State<Login>{
   }
 
   void registrati(){
-    //TODO nick ha caricato il codice, vai a vedere
   }
 
   void loginS(String s){
     login();
   }
-  void login()async{
+  void login() async{
+    print("mail: "+ _controllerMail.text);
+    print("pass: "+ _controllerPassword.text);
     LogInResult res = await Model.sharedInstance.logIn(_controllerMail.text, _controllerPassword.text);
     LoginState.sharedInstance.setLoginState(res);
   }

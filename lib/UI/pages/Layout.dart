@@ -12,7 +12,7 @@ class Layout extends StatefulWidget {
 
   Layout({Key? key,required this.title}) : super(key: key);
 
-  //static _LayoutState layout = _LayoutState(); //todo NICK
+  //static _LayoutState layout = _LayoutState();
   @override
   _LayoutState createState() => _LayoutState();
 
@@ -31,7 +31,7 @@ class _LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold( //todo Nick
+      child: Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Column(
             children: const [Icon(Icons.logout), Text("logout")],

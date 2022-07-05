@@ -8,9 +8,9 @@ class Constants {
   static final String ADDRESS_AUTHENTICATION_SERVER = "localhost:8080";
 
   // authentication
-  static final String REALM = "***";
-  static final String CLIENT_ID = "***";
-  static final String CLIENT_SECRET = "***";
+  static final String REALM = "ticketstore-flutter";
+  static final String CLIENT_ID = "ticketstore-flutter";
+  static final String CLIENT_SECRET = "ld5PGgxa4X4KJok1dJEC8OtP8Jjm4Rif";
   static final String REQUEST_LOGIN = "/auth/realms/" + REALM + "/protocol/openid-connect/token";
   static final String REQUEST_LOGOUT = "/auth/realms/" + REALM + "/protocol/openid-connect/logout";
 
