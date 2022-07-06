@@ -87,6 +87,7 @@ class RestManager {
           errorOccurred = false;
         }
         print(response.toString());
+        print(token);
         print("ricevo");
         return response.body;
       } catch (err) {
