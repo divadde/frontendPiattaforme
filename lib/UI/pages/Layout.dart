@@ -1,6 +1,7 @@
 import 'package:frontend_ticketstore/UI/pages/Search.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/Model.dart';
 import '../../model/support/LogInResult.dart';
 import '../../model/support/LoginState.dart';
 import 'ListaBiglietti.dart';
@@ -39,7 +40,9 @@ class _LayoutState extends State<Layout> {
           child: Column(
             children: const [Icon(Icons.logout), Text("logout")],
           ),
-          onPressed: (){setState((){LoginState.sharedInstance.setLoginState(LogInResult.error_wrong_credentials);});},
+          onPressed: (){setState((){
+            if(LoginState.sharedInstance.getLoginState()==LogInResult.logged) Model.sharedInstance.logOut();
+            LoginState.sharedInstance.setLoginState(LogInResult.error_wrong_credentials);});},
         ),
         appBar: AppBar(
           backgroundColor: Colors.purple,
