@@ -13,10 +13,13 @@ class Constants {
   static final String CLIENT_SECRET = "ld5PGgxa4X4KJok1dJEC8OtP8Jjm4Rif";
   static final String REQUEST_LOGIN = "/realms/" + REALM + "/protocol/openid-connect/token";
   static final String REQUEST_LOGOUT = "/realms/" + REALM + "/protocol/openid-connect/logout";
+  static final String USER_INFO = "/realms/" + REALM +  "/protocol/openid-connect/userinfo";
 
   // requests
   static final String REQUEST_SEARCH_EVENTS = "/eventi/byName";
   static final String REQUEST_ADD_USER = "/users";
+  static final String REQUEST_GET_TICKETS = "/biglietti";
+
 
   // states
   static final String STATE_CLUB = "club";

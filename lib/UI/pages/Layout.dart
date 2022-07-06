@@ -6,26 +6,29 @@ import '../../model/support/LoginState.dart';
 import 'ListaBiglietti.dart';
 import 'Login.dart';
 
-//verifica correttezza todo
+
+//todo forse risolto
 class Layout extends StatefulWidget {
   final String title;
 
   Layout({Key? key,required this.title}) : super(key: key);
 
-  //static _LayoutState layout = _LayoutState();
+  static _LayoutState layoutState = _LayoutState();
   @override
-  _LayoutState createState() => _LayoutState();
+  State<StatefulWidget> createState() => layoutState;
+
+
+  static void setLogState(String email){
+    layoutState.email=email;
+    layoutState.setState((){}); //setLogResult, preso come stringa
+  }
 
 }//Layout
 
 
 class _LayoutState extends State<Layout> {
-  String title = "";
-
-  _LayoutState() {
-    this.title = title;
-  }
-
+  String title = "TicketStore";
+  String? email;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class _LayoutState extends State<Layout> {
           child: Column(
             children: const [Icon(Icons.logout), Text("logout")],
           ),
-          onPressed: (){LoginState.sharedInstance.setLoginState(LogInResult.error_wrong_credentials);},
+          onPressed: (){setState((){LoginState.sharedInstance.setLoginState(LogInResult.error_wrong_credentials);});},
         ),
         appBar: AppBar(
           backgroundColor: Colors.purple,
@@ -55,7 +58,7 @@ class _LayoutState extends State<Layout> {
         ),
         body: TabBarView(
           children: [
-            getChild(),
+            getChild(), //todo corretto così? nick restituisce una TabBarView
             Search(),
           ],
         ),
@@ -64,9 +67,10 @@ class _LayoutState extends State<Layout> {
   }
 
   StatefulWidget getChild(){
+    print("Stato del login globale: ");
+    print(LoginState.sharedInstance.getLoginState());
     return LoginState.sharedInstance.getLoginState() != LogInResult.logged?
-    Login()
-        : ListaBiglietti();
+    Login() : ListaBiglietti(email:email!);
   }
 
 }

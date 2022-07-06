@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:frontend_ticketstore/model/managers/RestManager.dart';
 import 'package:frontend_ticketstore/model/objects/AuthenticationData.dart';
+import 'package:frontend_ticketstore/model/objects/Biglietto.dart';
 import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:frontend_ticketstore/model/objects/Utente.dart';
 import 'package:frontend_ticketstore/model/support/Constants.dart';
@@ -28,6 +29,7 @@ class Model {
       print("post fatta: ");
       print(result);
       _authenticationData = AuthenticationData.fromJson(jsonDecode(result));
+      print(_authenticationData);
       if ( _authenticationData.hasError() ) {
         if ( _authenticationData.error == "Invalid user credentials" ) {
           return LogInResult.error_wrong_credentials;
@@ -85,6 +87,20 @@ class Model {
     catch (e) {
       return false;
     }
+  }
+
+  //ok
+  Future<String> getUserEmail() async {
+    String ret = json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_AUTHENTICATION_SERVER, Constants.USER_INFO, null))['email'];
+    print("email?");
+    print(ret);
+    return ret;
+  }
+
+  Future<List<Biglietto>> getBigliettiByEmail(String email) async{
+    Map<String, String> params = Map();
+    params["email"] = email;
+    return List<Biglietto>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_GET_TICKETS, params)).map((i) => Biglietto.fromJson(i)).toList());
   }
 
   //ok

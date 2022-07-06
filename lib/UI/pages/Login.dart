@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:frontend_ticketstore/UI/pages/ListaBiglietti.dart';
 import 'package:frontend_ticketstore/model/support/LoginState.dart';
 import 'package:http/http.dart';
 import '../../model/Model.dart';
 import '../../model/support/LogInResult.dart';
 import '../widgets/TextInputField.dart';
+import 'Layout.dart';
 
 //todo aggiusta
 class Login extends StatefulWidget{
@@ -34,6 +38,7 @@ class _PersonalAreaState extends State<Login>{
 
   @override
   Widget build(BuildContext context) {
+    print("ciao login");
     return p == page.login?
     LoginPage() : RegistrationPage();
   }
@@ -142,7 +147,17 @@ class _PersonalAreaState extends State<Login>{
     print("mail: "+ _controllerMail.text);
     print("pass: "+ _controllerPassword.text);
     LogInResult res = await Model.sharedInstance.logIn(_controllerMail.text, _controllerPassword.text);
+    print("risultato del login: ");
+    print(res);
     LoginState.sharedInstance.setLoginState(res);
+    print("proviamo ora a ricevere informazioni sullo user");
+    String mailUser = await Model.sharedInstance.getUserEmail();
+    print("abbiamo ottenuto: ");
+    print(mailUser);
+    setState((){
+      //ListaBiglietti.setMailUtente(mailUser);
+      Layout.setLogState(mailUser);
+    });
   }
 
 }
