@@ -1,3 +1,4 @@
+import 'package:frontend_ticketstore/UI/widgets/BuyButton.dart';
 import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:flutter/material.dart';
 
@@ -30,10 +31,17 @@ class EventCard extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
             ),
+            BuyButton(onPressed: acquista),
           ],
         ),
       ),
     );
+  }
+
+  void acquista(){
+    //scelgo settore e posto in maniera randomica
+    //evento lo ho già
+    //ottengo lo user dal token
   }
 
 

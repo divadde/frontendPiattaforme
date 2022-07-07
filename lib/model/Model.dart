@@ -92,9 +92,16 @@ class Model {
   //ok
   Future<String> getUserEmail() async {
     String ret = json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_AUTHENTICATION_SERVER, Constants.USER_INFO, null))['email'];
-    print("email?");
     print(ret);
     return ret;
+  }
+
+  //todo prova
+  Future<Utente> getUserByEmail(String email) async {
+    Map<String, String> params = Map();
+    params["email"] = email;
+    String rawResult = await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_USER_BY_MAIL, params);
+    return Utente.fromJson(jsonDecode(rawResult));
   }
 
   Future<List<Biglietto>> getBigliettiByEmail(String email) async{
@@ -111,7 +118,7 @@ class Model {
     return List<Evento>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_SEARCH_EVENTS, params)).map((i) => Evento.fromJson(i)).toList());
   }
 
-  //forse non serve
+  //todo
   Future<Utente> addUser(Utente user) async {
       String rawResult = await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
       /*if ( rawResult.contains(Constants.RESPONSE_ERROR_MAIL_USER_ALREADY_EXISTS) ) {
