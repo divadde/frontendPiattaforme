@@ -5,6 +5,8 @@ import 'package:frontend_ticketstore/UI/pages/ListaBiglietti.dart';
 import 'package:frontend_ticketstore/model/support/LoginState.dart';
 import 'package:http/http.dart';
 import '../../model/Model.dart';
+import '../../model/objects/Utente.dart';
+import '../../model/objects/UtenteCompleto.dart';
 import '../../model/support/LogInResult.dart';
 import '../widgets/TextInputField.dart';
 import 'Layout.dart';
@@ -24,13 +26,14 @@ enum page{
 class _PersonalAreaState extends State<Login>{
   page p = page.login;
   late Response data;
-  TextEditingController _controllerMail = TextEditingController();
+  TextEditingController _controllerUser = TextEditingController();
   TextEditingController _controllerPassword = TextEditingController();
 
   TextEditingController _RegcontrollerNome = TextEditingController();
   TextEditingController _RegcontrollerCogn = TextEditingController();
   TextEditingController _RegcontrollerMail = TextEditingController();
   TextEditingController _RegcontrollerPass = TextEditingController();
+  TextEditingController _RegcontrollerUser = TextEditingController();
   TextEditingController _RegcontrollerCF = TextEditingController();
   TextEditingController _RegcontrollerCitta = TextEditingController();
   TextEditingController _RegcontrollerEta = TextEditingController();
@@ -64,7 +67,7 @@ class _PersonalAreaState extends State<Login>{
                         fontStyle: FontStyle.italic,
                       ),
                     ),
-                    TextInputField(hint:"mail", controller: _controllerMail,submit: loginS),
+                    TextInputField(hint:"user", controller: _controllerUser,submit: loginS),
                     TextInputField(hint:"password", controller: _controllerPassword,submit: loginS,),
                     IconButton( onPressed: login,
                       icon: Icon(Icons.login, size: 25,),),
@@ -94,11 +97,6 @@ class _PersonalAreaState extends State<Login>{
           children: [
             Opacity(
               opacity: 0.4,
-              child: Image.asset("images/homeImage.jpg",
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.fitWidth ,
-              ),
             ),
             Center(
               child:SizedBox(
@@ -113,6 +111,7 @@ class _PersonalAreaState extends State<Login>{
                         fontStyle: FontStyle.italic,
                       ),
                     ),
+                    TextInputField(hint:"user",controller: _RegcontrollerUser,),
                     TextInputField(hint:"mail",controller: _RegcontrollerMail,),
                     TextInputField(hint:"password",controller: _RegcontrollerPass,),
                     TextInputField(hint:"nome",controller: _RegcontrollerNome,),
@@ -137,16 +136,63 @@ class _PersonalAreaState extends State<Login>{
     );
   }
 
+
   void registrati(){
+    /*
+    setState((){
+      p = page.progress;
+    });
+     */
+    UtenteCompleto u = UtenteCompleto(
+        username: _RegcontrollerUser.text,
+        password: _RegcontrollerPass.text,
+        utente: Utente(
+            email: _RegcontrollerMail.text,
+            nome: _RegcontrollerNome.text,
+            cognome: _RegcontrollerCogn.text, 
+            citta: _RegcontrollerCitta.text,
+            eta: int.parse(_RegcontrollerEta.text),
+            cf: _RegcontrollerCF.text,
+            //id: null
+        )
+    );
+    Model.sharedInstance.registraUtente(u).then((value) { //todo
+      if( value.compareTo("registrazione completata") == 0) {
+        setState((){
+          _RegcontrollerEta.clear();
+          _RegcontrollerCitta.clear();
+          _RegcontrollerCogn.clear();
+          _RegcontrollerNome.clear();
+          _RegcontrollerCF.clear();
+          _RegcontrollerPass.clear();
+          _RegcontrollerUser.clear();
+          _RegcontrollerMail.clear();
+          //_alert = Text(""); //todo, cosa fa alert?
+          p = page.login;
+        });
+      }else{
+        setState((){
+          p = page.registration;
+          /*
+          _alert = const Text( //todo
+            "qualcosa è andato storto",
+            style: TextStyle(
+                color: Colors.red
+            ),
+           */
+        });
+      }
+    });
   }
+
 
   void loginS(String s){
     login();
   }
   void login() async{
-    print("mail: "+ _controllerMail.text);
+    print("user: "+ _controllerUser.text);
     print("pass: "+ _controllerPassword.text);
-    LogInResult res = await Model.sharedInstance.logIn(_controllerMail.text, _controllerPassword.text);
+    LogInResult res = await Model.sharedInstance.logIn(_controllerUser.text, _controllerPassword.text);
     print("risultato del login: ");
     print(res);
     LoginState.sharedInstance.setLoginState(res);

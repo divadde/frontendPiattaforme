@@ -5,6 +5,7 @@ import 'package:frontend_ticketstore/model/objects/AuthenticationData.dart';
 import 'package:frontend_ticketstore/model/objects/Biglietto.dart';
 import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:frontend_ticketstore/model/objects/Utente.dart';
+import 'package:frontend_ticketstore/model/objects/UtenteCompleto.dart';
 import 'package:frontend_ticketstore/model/support/Constants.dart';
 import 'package:frontend_ticketstore/model/support/LogInResult.dart';
 
@@ -17,13 +18,13 @@ class Model {
 
 
   //ok
-  Future<LogInResult> logIn(String email, String password) async {
+  Future<LogInResult> logIn(String username, String password) async {
     try{
       Map<String, String> params = Map();
       params["grant_type"] = "password";
       params["client_id"] = Constants.CLIENT_ID;
       params["client_secret"] = Constants.CLIENT_SECRET;
-      params["username"] = email;
+      params["username"] = username;
       params["password"] = password;
       String result = await _restManager.makePostRequest(Constants.ADDRESS_AUTHENTICATION_SERVER, Constants.REQUEST_LOGIN, params, type: TypeHeader.urlencoded);
       print("post fatta: ");
@@ -104,6 +105,7 @@ class Model {
     return Utente.fromJson(jsonDecode(rawResult));
   }
 
+  //ok
   Future<List<Biglietto>> getBigliettiByEmail(String email) async{
     Map<String, String> params = Map();
     params["email"] = email;
@@ -118,17 +120,14 @@ class Model {
     return List<Evento>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_SEARCH_EVENTS, params)).map((i) => Evento.fromJson(i)).toList());
   }
 
+
   //todo
-  Future<Utente> addUser(Utente user) async {
-      String rawResult = await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
-      /*if ( rawResult.contains(Constants.RESPONSE_ERROR_MAIL_USER_ALREADY_EXISTS) ) {
-        return null; // not the best solution
-      }
-       */
-      return Utente.fromJson(jsonDecode(rawResult));
+  Future<String> registraUtente(UtenteCompleto user) async {
+      return await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
   }
 
-  //aggiungi acquisto biglietto
+
+  //aggiungi acquisto biglietto todo
 
 
 }
