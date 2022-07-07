@@ -37,6 +37,7 @@ class _LayoutState extends State<Layout> {
       length: 2,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.purple,
           child: Column(
             children: const [Icon(Icons.logout), Text("logout")],
           ),

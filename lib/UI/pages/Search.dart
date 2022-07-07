@@ -23,14 +23,26 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            top(),
-            bottom(),
-          ],
-        ),
-      ),
+        body: Stack(
+            children: [
+              Opacity(
+                opacity: 0.4,
+                child: Image.asset("images/home.png",
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.fitWidth ,
+                ),
+              ),
+              Center(
+                child: Column(
+                  children: [
+                    top(),
+                    bottom(),
+                  ],
+                ),
+              ),
+            ]
+        )
     );
   }
 

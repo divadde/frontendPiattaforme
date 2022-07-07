@@ -18,7 +18,7 @@ class Constants {
   // requests
   static final String REQUEST_SEARCH_EVENTS = "/eventi/byName";
   static final String REQUEST_ADD_USER = "/registrazione";
-  static final String REQUEST_GET_TICKETS = "/biglietti";
+  static final String REQUEST_TICKETS = "/biglietti";
   static final String REQUEST_USER_BY_MAIL= "/utenti/byMail";
 
 

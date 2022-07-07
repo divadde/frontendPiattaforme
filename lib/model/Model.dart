@@ -109,26 +109,28 @@ class Model {
   Future<List<Biglietto>> getBigliettiByEmail(String email) async{
     Map<String, String> params = Map();
     params["email"] = email;
-    return List<Biglietto>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_GET_TICKETS, params)).map((i) => Biglietto.fromJson(i)).toList());
+    return List<Biglietto>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_TICKETS, params)).map((i) => Biglietto.fromJson(i)).toList());
   }
 
   //ok
   Future<List<Evento>> searchEvent(String nome) async {
     Map<String, String> params = Map();
     params["nome"] = nome;
-    print("Search eventi:" +nome);
+    //print("Search eventi:" +nome);
     return List<Evento>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_SEARCH_EVENTS, params)).map((i) => Evento.fromJson(i)).toList());
   }
 
 
-  //todo
+  //ok
   Future<String> registraUtente(UtenteCompleto user) async {
-    print("Model: invio richiesta di registrazione");
-      return await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
+    //print("Model: invio richiesta di registrazione");
+    return await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
   }
 
-
-  //aggiungi acquisto biglietto todo
+  //todo
+  Future<String> aggiungiBiglietto(Biglietto biglietto) async {
+    return await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_TICKETS, biglietto);
+  }
 
 
 }

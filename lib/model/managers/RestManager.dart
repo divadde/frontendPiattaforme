@@ -16,14 +16,14 @@ class RestManager {
 
 
   Future<String> _makeRequest(String serverAddress, String servicePath, String method, TypeHeader? type, {Map<String, String>? value, dynamic body}) async {
-    print("sono nel makeRequest");
+    //print("sono nel makeRequest");
     Uri uri = Uri.http(serverAddress, servicePath, value);
     bool errorOccurred = false;
-    print("Uri ottenuto: ");
+    //print("Uri ottenuto: ");
     print(uri);
-    print("value: ");
+    //print("value: ");
     print(value);
-    print("body: ");
+    //print("body: ");
     print(body);
     while (true) {
       try {
@@ -42,8 +42,8 @@ class RestManager {
         // setting headers
         Map<String, String> headers = Map();
         headers[HttpHeaders.contentTypeHeader] = contentType;
-        print("token: ");
-        print(token);
+        //print("token: ");
+        //print(token);
         if (token != null) {
           headers[HttpHeaders.authorizationHeader] = 'bearer $token';
         }
@@ -100,14 +100,14 @@ class RestManager {
   }
 
   Future<String> makePostRequest(String serverAddress, String servicePath, dynamic value, {TypeHeader type = TypeHeader.json}) async {
-    print("nel postRequest:");
-    print(value);
+    //print("nel postRequest:");
+    //print(value);
     return _makeRequest(serverAddress, servicePath, "post", type, body: value);
   }
 
   Future<String> makeGetRequest(String serverAddress, String servicePath, [Map<String, String>? value, TypeHeader? type]) async {
-    print("invio al make request, con valore:");
-    print(value);
+    //print("invio al make request, con valore:");
+    //print(value);
     return _makeRequest(serverAddress, servicePath, "get", type, value: value);
   }
 

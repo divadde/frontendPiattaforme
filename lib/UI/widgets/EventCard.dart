@@ -2,6 +2,10 @@ import 'package:frontend_ticketstore/UI/widgets/BuyButton.dart';
 import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/Model.dart';
+import '../../model/objects/Biglietto.dart';
+import '../../model/objects/Utente.dart';
+
 
 class EventCard extends StatelessWidget {
   final Evento event;
@@ -21,7 +25,7 @@ class EventCard extends StatelessWidget {
             Text(
               event.nome,
               style: TextStyle(
-                fontSize: 40,
+                fontSize: 30,
                 color: Theme.of(context).primaryColor,
               ),
             ),
@@ -38,10 +42,24 @@ class EventCard extends StatelessWidget {
     );
   }
 
-  void acquista(){
-    //scelgo settore e posto in maniera randomica
-    //evento lo ho già
-    //ottengo lo user dal token
+  void acquista() {
+    print("pronto all'acquisto");
+    String settore = "A"; //todo in maniera randomica
+    String posto = "1";
+    Model.sharedInstance.getUserEmail().then((mail) {
+      print("mail ottenuta: ");
+      print(mail);
+      Model.sharedInstance.getUserByEmail(mail).then((utente) {
+        print("utente ottenuto: ");
+        print(utente);
+        Biglietto biglietto = Biglietto(
+            settore: settore, posto: posto, evento: event, utente:utente);
+        print("biglietto composto: ");
+        print(biglietto);
+        Model.sharedInstance.aggiungiBiglietto(biglietto);
+      });
+    });
+    print("biglietto acquistato");
   }
 
 

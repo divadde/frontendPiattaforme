@@ -52,8 +52,12 @@ class _PersonalAreaState extends State<Login>{
           children: [
             Opacity(
               opacity: 0.4,
-              child: Icon(Icons.home_rounded),
+              child: Image.asset("images/home.png",
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fitWidth ,
               ),
+            ),
             Center(
               child:SizedBox(
                 width: 400,
@@ -97,6 +101,11 @@ class _PersonalAreaState extends State<Login>{
           children: [
             Opacity(
               opacity: 0.4,
+              child: Image.asset("images/home.png",
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fitWidth ,
+              ),
             ),
             Center(
               child:SizedBox(
@@ -107,7 +116,7 @@ class _PersonalAreaState extends State<Login>{
                     const Text(
                       "Registrazione",
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 20,
                         fontStyle: FontStyle.italic,
                       ),
                     ),
@@ -122,7 +131,7 @@ class _PersonalAreaState extends State<Login>{
                     IconButton(
                       onPressed: registrati, //todo perché non visualizza?
                       icon:  Icon(
-                          size: 25,
+                          size: 20,
                           Icons.app_registration
                       ),
                     ),

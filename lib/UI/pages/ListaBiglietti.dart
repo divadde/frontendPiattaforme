@@ -44,16 +44,41 @@ class _BigliettiState extends State<ListaBiglietti> {
     if(biglietti!=null) {
       print("pronto a stampare");
       return Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              bottom(),
-            ],
-          ),
-        ),
+        body: Stack(
+          children: [
+            Opacity(
+              opacity: 0.4,
+              child: Image.asset("images/home.png",
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fitWidth ,
+              ),
+            ),
+            Center(
+              child: Column(
+                children: [
+                  bottom(),
+                ],
+              ),
+            ),
+          ],
+        )
       );
     }
-    return Scaffold();
+    return Scaffold(
+      body: Stack(
+        children: [
+          Opacity(
+            opacity: 0.4,
+            child: Image.asset("images/home.png",
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.fitWidth ,
+            ),
+          ),
+        ]
+      )
+    );
   }
 
   Widget bottom() {
