@@ -120,7 +120,7 @@ class _PersonalAreaState extends State<Login>{
                     TextInputField(hint:"eta",controller: _RegcontrollerEta,),
                     TextInputField(hint:"citta",controller: _RegcontrollerCitta,),
                     IconButton(
-                      onPressed: registrati,
+                      onPressed: registrati, //todo perché non visualizza?
                       icon:  Icon(
                           size: 25,
                           Icons.app_registration
@@ -138,6 +138,7 @@ class _PersonalAreaState extends State<Login>{
 
 
   void registrati(){
+    print("pronti a registrarci");
     /*
     setState((){
       p = page.progress;
@@ -157,8 +158,10 @@ class _PersonalAreaState extends State<Login>{
         )
     );
     Model.sharedInstance.registraUtente(u).then((value) { //todo
+      print("chiamata al model fatta");
       if( value.compareTo("registrazione completata") == 0) {
         setState((){
+          print("registrazione completata!");
           _RegcontrollerEta.clear();
           _RegcontrollerCitta.clear();
           _RegcontrollerCogn.clear();

@@ -123,6 +123,7 @@ class Model {
 
   //todo
   Future<String> registraUtente(UtenteCompleto user) async {
+    print("Model: invio richiesta di registrazione");
       return await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
   }
 
