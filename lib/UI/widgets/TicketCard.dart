@@ -26,13 +26,13 @@ class TicketCard extends StatelessWidget {
               ),
             ),
             Text(
-              biglietto.settore,
+              "Settore: " + biglietto.settore,
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
               ),
             ),
             Text(
-              biglietto.posto,
+              "Posto: " +biglietto.posto,
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
               ),
