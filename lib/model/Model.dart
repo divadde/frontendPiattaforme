@@ -113,11 +113,11 @@ class Model {
   }
 
   //ok
-  Future<List<Evento>> searchEvent(String nome) async {
+  Future<String> searchEvent(String nome) async {
     Map<String, String> params = Map();
     params["nome"] = nome;
     //print("Search eventi:" +nome);
-    return List<Evento>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_SEARCH_EVENTS, params)).map((i) => Evento.fromJson(i)).toList());
+    return await _restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_SEARCH_EVENTS, params);
   }
 
 

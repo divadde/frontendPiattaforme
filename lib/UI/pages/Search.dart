@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:frontend_ticketstore/UI/widgets/CircularIconButton.dart';
 import 'package:frontend_ticketstore/UI/widgets/InputField.dart';
 import 'package:frontend_ticketstore/UI/widgets/EventCard.dart';
@@ -84,7 +86,14 @@ class _SearchState extends State<Search> {
   }
 
   Widget noResults() {
-    return Text("Nessun risultato!");
+    return Text(
+      "Nessun evento trovato con questi parametri di ricerca.",
+      style: TextStyle(
+        fontSize: 20,
+        fontStyle: FontStyle.italic,
+        color: Colors.white,
+      ),
+    );
   }
 
   Widget yesResults() {
@@ -112,7 +121,12 @@ class _SearchState extends State<Search> {
       print(result);
       setState(() {
         _searching = false;
-        _events = result;
+        if(result.compareTo("No results!")==0){
+          _events=null;
+        }
+        else {
+          _events = List<Evento>.from(json.decode(result).map((i) => Evento.fromJson(i)).toList());
+        }
       });
     });
   }

@@ -62,7 +62,7 @@ class _BigliettiState extends State<ListaBiglietti> {
                     style: TextStyle(
                       fontSize: 30,
                       fontStyle: FontStyle.italic,
-                      color: Colors.white,
+                      color: Colors.purple,
                     ),
                   ),
                   bottom(),
