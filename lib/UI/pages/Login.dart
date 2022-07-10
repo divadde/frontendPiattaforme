@@ -8,6 +8,7 @@ import '../../model/Model.dart';
 import '../../model/objects/Utente.dart';
 import '../../model/objects/UtenteCompleto.dart';
 import '../../model/support/LogInResult.dart';
+import '../widgets/GenericPopUp.dart';
 import '../widgets/TextInputField.dart';
 import 'Layout.dart';
 
@@ -179,19 +180,23 @@ class _PersonalAreaState extends State<Login>{
           _RegcontrollerPass.clear();
           _RegcontrollerUser.clear();
           _RegcontrollerMail.clear();
-          //_alert = Text(""); //todo, cosa fa alert?
+          showDialog(
+              context: context,
+              builder: (BuildContext context) =>
+                  GenericPopUp(label: "Registrazione avvenuta con successo.").build(
+                      context)
+          );
           p = page.login;
         });
       }else{
         setState((){
           p = page.registration;
-          /*
-          _alert = const Text( //todo
-            "qualcosa è andato storto",
-            style: TextStyle(
-                color: Colors.red
-            ),
-           */
+          showDialog(
+              context: context,
+              builder: (BuildContext context) =>
+                  GenericPopUp(label: "Qualcosa è andato storto con la registrazione.\nIl nickname è già esistente oppure i dati inseriti sono scorretti").build(
+                      context)
+          );
         });
       }
     });

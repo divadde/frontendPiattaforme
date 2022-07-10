@@ -3,10 +3,12 @@ import 'package:frontend_ticketstore/UI/widgets/CircularIconButton.dart';
 import 'package:frontend_ticketstore/UI/widgets/GenericPopUp.dart';
 import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend_ticketstore/model/support/LogInResult.dart';
 
 import '../../model/Model.dart';
 import '../../model/objects/Biglietto.dart';
 import '../../model/objects/Utente.dart';
+import '../../model/support/LoginState.dart';
 import 'SceltaPosto.dart';
 import 'SceltaSettore.dart';
 
@@ -84,6 +86,14 @@ class EventCard extends StatelessWidget {
           child: const Text('Chiudi'),
         ),
         BuyButton(onPressed: () {
+          if(!(LoginState.sharedInstance.getLoginState()==LogInResult.logged)) {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    GenericPopUp(label: "Devi aver effettuato il login per poter acquistare un biglietto.").build(context)
+            );
+          }
+          else {
           acquista(settore.getValue(), posto.getValue()).then((risposta) {
             print("risposta nel metodo: ");
             print(risposta);
@@ -93,28 +103,28 @@ class EventCard extends StatelessWidget {
                 builder: (BuildContext context) =>
                     GenericPopUp(label: "Non ci sono più posti per questo evento.").build(context)
               );
-            }else {
-              if (risposta!.compareTo("SEAT_ALREADY_OCCUPIED") == 0) {
-                print("posto già occupato");
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        GenericPopUp(label: "Posto già occupato.").build(
+            }
+            else {
+                if (risposta!.compareTo("SEAT_ALREADY_OCCUPIED") == 0) {
+                  print("posto già occupato");
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          GenericPopUp(label: "Posto già occupato.").build(
                             context)
-                );
-              }
-              else {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        GenericPopUp(label: "Biglietto acquistato con successo.").build(
-                            context)
-                );
-              }
+                  );
+                }
+                else {
+                  showDialog(
+                     context: context,
+                      builder: (BuildContext context) =>
+                          GenericPopUp(label: "Biglietto acquistato con successo.").build(context)
+                  );
+                }
             }
           });
-          }
-        ),
+         };
+        }),
       ],
     );
   }

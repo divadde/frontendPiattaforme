@@ -62,7 +62,7 @@ class _LayoutState extends State<Layout> {
         ),
         body: TabBarView(
           children: [
-            getChild(), //todo corretto così? nick restituisce una TabBarView
+            getChild(),
             Search(),
           ],
         ),
