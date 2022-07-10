@@ -6,7 +6,6 @@ import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:flutter/material.dart';
 
 
-//ok todo verifica correttezza + aggiunti bottone dell'acquisto
 class Search extends StatefulWidget {
   Search({Key? key}) : super(key: key);
 

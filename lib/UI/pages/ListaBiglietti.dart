@@ -57,6 +57,14 @@ class _BigliettiState extends State<ListaBiglietti> {
             Center(
               child: Column(
                 children: [
+                  const Text(
+                    "Lista biglietti acquistati",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white,
+                    ),
+                  ),
                   bottom(),
                 ],
               ),
