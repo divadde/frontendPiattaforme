@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class SceltaSettore extends StatefulWidget {
 
   SceltaSettore({Key? key}) : super(key: key);
 
-  static _SceltaState sceltaSettore = _SceltaState();
+  _SceltaState sceltaSettore = _SceltaState();
+
   @override
   State<SceltaSettore> createState() => sceltaSettore;
 

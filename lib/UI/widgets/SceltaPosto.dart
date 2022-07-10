@@ -5,12 +5,13 @@ class SceltaPosto extends StatefulWidget {
 
   SceltaPosto({Key? key}) : super(key: key);
 
-  static _SceltaState sceltaSettore = _SceltaState();
+  _SceltaState sceltaPosto = _SceltaState();
+
   @override
-  State<SceltaPosto> createState() => sceltaSettore;
+  State<SceltaPosto> createState() => sceltaPosto;
 
   String? getValue(){
-    return sceltaSettore.getValue();
+    return sceltaPosto.getValue();
   }
 
 }

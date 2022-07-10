@@ -97,7 +97,7 @@ class Model {
     return ret;
   }
 
-  //todo prova
+  //ok
   Future<Utente> getUserByEmail(String email) async {
     Map<String, String> params = Map();
     params["email"] = email;

@@ -1,5 +1,6 @@
 import 'package:frontend_ticketstore/UI/widgets/BuyButton.dart';
 import 'package:frontend_ticketstore/UI/widgets/CircularIconButton.dart';
+import 'package:frontend_ticketstore/UI/widgets/GenericPopUp.dart';
 import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:flutter/material.dart';
 
@@ -72,48 +73,6 @@ class EventCard extends StatelessWidget {
         children: [
           settore,
           posto,
-      /*
-      DropdownButton(
-      value: settore,
-        icon: const Icon(Icons.arrow_downward),
-        elevation: 16,
-        style: const TextStyle(color: Colors.deepPurple),
-        underline: Container(
-          height: 2,
-          color: Colors.deepPurpleAccent,
-        ),
-        onChanged: (String? newValue) { () =>
-            settore = newValue!;
-          },
-        items: <String>['Gradinata', 'Tribuna', 'Curva']
-            .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-      ),
-         DropdownButton<String>(
-            value: posto,
-            icon: const Icon(Icons.arrow_downward),
-            elevation: 16,
-            style: const TextStyle(color: Colors.deepPurple),
-            underline: Container(
-              height: 2,
-              color: Colors.deepPurpleAccent,
-            ),
-            onChanged: (String? newValue) { () =>
-              posto = newValue!;
-            },
-            items: <String>['1', '2', '3', '4', '5', '6', '7']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-       */
         ],
       ),
       actions: <Widget>[
@@ -124,32 +83,65 @@ class EventCard extends StatelessWidget {
           textColor: Theme.of(context).primaryColor,
           child: const Text('Chiudi'),
         ),
-        BuyButton(onPressed: () =>
-            acquista(settore.getValue(),posto.getValue())),
+        BuyButton(onPressed: () {
+          acquista(settore.getValue(), posto.getValue()).then((risposta) {
+            print("risposta nel metodo: ");
+            print(risposta);
+            if (risposta!.compareTo("NO_SEATS_AVAILABLE") == 0) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    GenericPopUp(label: "Non ci sono più posti per questo evento.").build(context)
+              );
+            }else {
+              if (risposta!.compareTo("SEAT_ALREADY_OCCUPIED") == 0) {
+                print("posto già occupato");
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        GenericPopUp(label: "Posto già occupato.").build(
+                            context)
+                );
+              }
+              else {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        GenericPopUp(label: "Biglietto acquistato con successo.").build(
+                            context)
+                );
+              }
+            }
+          });
+          }
+        ),
       ],
     );
   }
 
 
-  void acquista(String? settore, String? posto) {
+  Future<String> acquista(String? settore, String? posto) async {
     print("pronto all'acquisto");
     print(settore);
     print(posto);
-    Model.sharedInstance.getUserEmail().then((mail) {
+    Biglietto? biglietto;
+    await Model.sharedInstance.getUserEmail().then((mail) async {
       print("mail ottenuta: ");
       print(mail);
-      Model.sharedInstance.getUserByEmail(mail).then((utente) {
+      await Model.sharedInstance.getUserByEmail(mail).then((utente) {
         print("utente ottenuto: ");
         print(utente);
-        Biglietto biglietto = Biglietto(
-            settore: settore!, posto: posto!, evento: event, utente:utente);
+        biglietto = Biglietto(
+            settore: settore!, posto: posto!, evento: event, utente: utente);
         print("biglietto composto: ");
         print(biglietto);
-        Model.sharedInstance.aggiungiBiglietto(biglietto);
       });
     });
-    print("biglietto acquistato");
+    print("pronti ad aggiungere il biglietto");
+    return Model.sharedInstance.aggiungiBiglietto(biglietto!);
   }
+
+
 
 
 }
