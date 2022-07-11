@@ -213,14 +213,23 @@ class _PersonalAreaState extends State<Login>{
     print("risultato del login: ");
     print(res);
     LoginState.sharedInstance.setLoginState(res);
-    print("proviamo ora a ricevere informazioni sullo user");
-    String mailUser = await Model.sharedInstance.getUserEmail();
-    print("abbiamo ottenuto: ");
-    print(mailUser);
-    setState((){
-      //ListaBiglietti.setMailUtente(mailUser);
-      Layout.setLogState(mailUser);
-    });
+    if(res!=LogInResult.logged){
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              GenericPopUp(label: "Credenziali errate. Riprova.").build(
+                  context)
+      );
+    }
+    else {
+      print("proviamo ora a ricevere informazioni sullo user");
+      String mailUser = await Model.sharedInstance.getUserEmail();
+      print("abbiamo ottenuto: ");
+      print(mailUser);
+      setState(() {
+        Layout.setLogState(mailUser);
+      });
+    }
   }
 
 }
