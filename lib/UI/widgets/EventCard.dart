@@ -41,6 +41,18 @@ class EventCard extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
             ),
+            Text(
+              event.giorno,
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            Text(
+              event.orario,
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
             RaisedButton(
               child: Text(
               'Scegli settore e posto',
@@ -94,36 +106,41 @@ class EventCard extends StatelessWidget {
             );
           }
           else {
-          acquista(settore.getValue(), posto.getValue()).then((risposta) {
-            print("risposta nel metodo: ");
-            print(risposta);
-            if (risposta!.compareTo("NO_SEATS_AVAILABLE") == 0) {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    GenericPopUp(label: "Non ci sono più posti per questo evento.").build(context)
-              );
-            }
-            else {
-                if (risposta!.compareTo("SEAT_ALREADY_OCCUPIED") == 0) {
-                  print("posto già occupato");
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) =>
-                          GenericPopUp(label: "Posto già occupato.").build(
-                            context)
-                  );
-                }
-                else {
-                  showDialog(
-                     context: context,
-                      builder: (BuildContext context) =>
-                          GenericPopUp(label: "Biglietto acquistato con successo.").build(context)
-                  );
-                }
-            }
-          });
-         };
+              if (settore.getValue()!=null && posto.getValue()!=null) {
+                  acquista(settore.getValue(), posto.getValue()).then((risposta) {
+                    print("risposta nel metodo: ");
+                    print(risposta);
+                    if (risposta!.compareTo("NO_SEATS_AVAILABLE") == 0) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                          GenericPopUp(label: "Non ci sono più posti per questo evento.").build(context)
+                        );
+                    }
+                    else {
+                        if (risposta!.compareTo("SEAT_ALREADY_OCCUPIED") == 0) {
+                            print("posto già occupato");
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => GenericPopUp(label: "Posto già occupato.").build(context)
+                            );
+                        }
+                        else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => GenericPopUp(label: "Biglietto acquistato con successo.").build(context)
+                            );
+                        }
+                    }
+                  });
+              }
+              else {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => GenericPopUp(label: "Devi inserire tribuna e posto.").build(context)
+                );
+              }
+          };
         }),
       ],
     );

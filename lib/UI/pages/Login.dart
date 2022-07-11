@@ -194,7 +194,7 @@ class _PersonalAreaState extends State<Login>{
           showDialog(
               context: context,
               builder: (BuildContext context) =>
-                  GenericPopUp(label: "Qualcosa è andato storto con la registrazione.\nIl nickname è già esistente oppure i dati inseriti sono scorretti").build(
+                  GenericPopUp(label: "Qualcosa è andato storto con la registrazione.\nIl nickname è già esistente oppure i dati inseriti sono scorretti.").build(
                       context)
           );
         });
