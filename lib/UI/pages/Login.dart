@@ -70,19 +70,31 @@ class _PersonalAreaState extends State<Login>{
                     ),
                     TextInputField(hint:"user", controller: _controllerUser,submit: loginS),
                     TextInputField(hint:"password", controller: _controllerPassword,submit: loginS,),
-                    IconButton( onPressed: login,
-                      icon: Icon(Icons.login, size: 25,),),
-                    Text("Se non sei registrato:"),
-                    IconButton(
-                      onPressed: () {
-                        setState((){p= page.registration;});
-                      },
-                      icon:  Icon(
-                          size: 25,
-                          Icons.app_registration
-                      ),
+                    Padding(
+                    padding: EdgeInsets.all(3),
+                    child: RawMaterialButton(
+                      onPressed: login,
+                      elevation: 2.0,
+                      fillColor: Theme.of(context).primaryColor,
+                      child: Text("Accedi", textScaleFactor: 1, style: TextStyle(color: Theme.of(context).backgroundColor)),
+                      padding: EdgeInsets.all(15.0),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    )
                     ),
-                    Text("Registrati"),
+                    Text("Oppure:"),
+                    Padding(
+                        padding: EdgeInsets.all(3),
+                        child: RawMaterialButton(
+                          onPressed: () {
+                            setState((){p= page.registration;});
+                          },
+                          elevation: 2.0,
+                          fillColor: Theme.of(context).primaryColor,
+                          child: Text("Registrati", textScaleFactor: 1, style: TextStyle(color: Theme.of(context).backgroundColor)),
+                          padding: EdgeInsets.all(15.0),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        )
+                    ),
                   ],
                 ),
               ),
@@ -125,14 +137,17 @@ class _PersonalAreaState extends State<Login>{
                     TextInputField(hint:"codice fiscale", controller: _RegcontrollerCF),
                     TextInputField(hint:"eta",controller: _RegcontrollerEta,),
                     TextInputField(hint:"citta",controller: _RegcontrollerCitta,),
-                    IconButton(
-                      onPressed: registrati,
-                      icon:  Icon(
-                          size: 20,
-                          Icons.app_registration
-                      ),
+                    Padding(
+                        padding: EdgeInsets.all(3),
+                        child: RawMaterialButton(
+                          onPressed: registrati,
+                          elevation: 2.0,
+                          fillColor: Theme.of(context).primaryColor,
+                          child: Text("Registrati", textScaleFactor: 1, style: TextStyle(color: Theme.of(context).backgroundColor)),
+                          padding: EdgeInsets.all(15.0),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        )
                     ),
-                    Text("Registrati"),
                   ],
                 ),
               ),
