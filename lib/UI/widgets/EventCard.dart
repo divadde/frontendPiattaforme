@@ -110,27 +110,45 @@ class EventCard extends StatelessWidget {
                   acquista(settore.getValue(), posto.getValue()).then((risposta) {
                     print("risposta nel metodo: ");
                     print(risposta);
-                    if (risposta!.compareTo("NO_SEATS_AVAILABLE") == 0) {
-                        showDialog(
+                    if (risposta!.compareTo("TICKET_ALREADY_BOUGHT") == 0) {
+                      showDialog(
                           context: context,
                           builder: (BuildContext context) =>
-                          GenericPopUp(label: "Non ci sono più posti per questo evento.").build(context)
-                        );
+                              GenericPopUp(
+                                  label: "Hai già acquistato un biglietto per questo evento.")
+                                  .build(context)
+                      );
                     }
                     else {
+                      if (risposta!.compareTo("NO_SEATS_AVAILABLE") == 0) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                GenericPopUp(
+                                    label: "Non ci sono più posti per questo evento.")
+                                    .build(context)
+                        );
+                      }
+                      else {
                         if (risposta!.compareTo("SEAT_ALREADY_OCCUPIED") == 0) {
-                            print("posto già occupato");
-                            showDialog(
+                          print("posto già occupato");
+                          showDialog(
                               context: context,
-                              builder: (BuildContext context) => GenericPopUp(label: "Posto già occupato.").build(context)
-                            );
+                              builder: (BuildContext context) =>
+                                  GenericPopUp(label: "Posto già occupato.")
+                                      .build(context)
+                          );
                         }
                         else {
-                            showDialog(
+                          showDialog(
                               context: context,
-                              builder: (BuildContext context) => GenericPopUp(label: "Biglietto acquistato con successo.").build(context)
-                            );
+                              builder: (BuildContext context) =>
+                                  GenericPopUp(
+                                      label: "Biglietto acquistato con successo.")
+                                      .build(context)
+                          );
                         }
+                      }
                     }
                   });
               }
