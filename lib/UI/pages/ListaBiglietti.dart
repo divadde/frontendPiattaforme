@@ -6,25 +6,12 @@ import '../../model/Model.dart';
 import '../../model/objects/Biglietto.dart';
 import '../widgets/TicketCard.dart';
 
-//todo
 class ListaBiglietti extends StatefulWidget {
   String email;
   ListaBiglietti({Key? key, required this.email}) : super(key: key);
 
 
   State<StatefulWidget> createState() => _BigliettiState(email);
-
-  /*
-  static _BigliettiState bigliettiState = _BigliettiState();
-  @override
-  State<StatefulWidget> createState() => bigliettiState;
-
-
-  static void setMailUtente(String mail){
-    bigliettiState.mailUtente=mail;
-    bigliettiState.setState((){});
-  }
-   */
 
 }
 
@@ -34,15 +21,12 @@ class _BigliettiState extends State<ListaBiglietti> {
 
   _BigliettiState(String email){
     mailUtente=email;
-    print("ciao bigliettiState");
     _riempiBiglietti();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("build biglietto");
     if(biglietti!=null) {
-      print("pronto a stampare");
       return Scaffold(
         body: Stack(
           children: [
@@ -106,8 +90,8 @@ class _BigliettiState extends State<ListaBiglietti> {
 
   void _riempiBiglietti() {
     Model.sharedInstance.getBigliettiByEmail(mailUtente!).then((result) {
-      print("risultato: ");
-      print(result);
+      //print("risultato: ");
+      //print(result);
       setState(() {
         biglietti = result;
       });

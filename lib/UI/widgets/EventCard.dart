@@ -1,5 +1,4 @@
 import 'package:frontend_ticketstore/UI/widgets/BuyButton.dart';
-import 'package:frontend_ticketstore/UI/widgets/CircularIconButton.dart';
 import 'package:frontend_ticketstore/UI/widgets/GenericPopUp.dart';
 import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:frontend_ticketstore/model/support/LogInResult.dart';
 
 import '../../model/Model.dart';
 import '../../model/objects/Biglietto.dart';
-import '../../model/objects/Utente.dart';
 import '../../model/support/LoginState.dart';
 import 'SceltaPosto.dart';
 import 'SceltaSettore.dart';
@@ -166,27 +164,23 @@ class EventCard extends StatelessWidget {
 
 
   Future<String> acquista(String? settore, String? posto) async {
-    print("pronto all'acquisto");
-    print(settore);
-    print(posto);
+    //print("pronto all'acquisto");
+    //print(settore);
+    //print(posto);
     Biglietto? biglietto;
     await Model.sharedInstance.getUserEmail().then((mail) async {
-      print("mail ottenuta: ");
-      print(mail);
+      //print("mail ottenuta: ");
+      //print(mail);
       await Model.sharedInstance.getUserByEmail(mail).then((utente) {
-        print("utente ottenuto: ");
-        print(utente);
+        //print("utente ottenuto: ");
+        //print(utente);
         biglietto = Biglietto(
             settore: settore!, posto: posto!, evento: event, utente: utente);
         print("biglietto composto: ");
         print(biglietto);
       });
     });
-    print("pronti ad aggiungere il biglietto");
     return Model.sharedInstance.aggiungiBiglietto(biglietto!);
   }
-
-
-
 
 }

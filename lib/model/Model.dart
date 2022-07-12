@@ -3,13 +3,11 @@ import 'dart:convert';
 import 'package:frontend_ticketstore/model/managers/RestManager.dart';
 import 'package:frontend_ticketstore/model/objects/AuthenticationData.dart';
 import 'package:frontend_ticketstore/model/objects/Biglietto.dart';
-import 'package:frontend_ticketstore/model/objects/Evento.dart';
 import 'package:frontend_ticketstore/model/objects/Utente.dart';
 import 'package:frontend_ticketstore/model/objects/UtenteCompleto.dart';
 import 'package:frontend_ticketstore/model/support/Constants.dart';
 import 'package:frontend_ticketstore/model/support/LogInResult.dart';
 
-//todo aggiungi acquisto biglietto
 class Model {
   static Model sharedInstance = Model();
 
@@ -93,7 +91,7 @@ class Model {
   //ok
   Future<String> getUserEmail() async {
     String ret = json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_AUTHENTICATION_SERVER, Constants.USER_INFO, null))['email'];
-    print(ret);
+    //print(ret);
     return ret;
   }
 
@@ -127,7 +125,7 @@ class Model {
     return await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_USER, user);
   }
 
-  //todo
+  //ok
   Future<String> aggiungiBiglietto(Biglietto biglietto) async {
     return await _restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_TICKETS, biglietto);
   }

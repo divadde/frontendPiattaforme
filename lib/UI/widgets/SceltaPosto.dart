@@ -21,8 +21,6 @@ class _SceltaState extends State<SceltaPosto> {
 
   @override
   Widget build(BuildContext context) {
-    print("posto:");
-    print(valore);
     return DropdownButton<String>(
       value: valore,
       icon: const Icon(Icons.arrow_downward),

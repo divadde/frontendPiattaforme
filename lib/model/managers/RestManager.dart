@@ -16,14 +16,10 @@ class RestManager {
 
 
   Future<String> _makeRequest(String serverAddress, String servicePath, String method, TypeHeader? type, {Map<String, String>? value, dynamic body}) async {
-    //print("sono nel makeRequest");
     Uri uri = Uri.http(serverAddress, servicePath, value);
     bool errorOccurred = false;
-    //print("Uri ottenuto: ");
     print(uri);
-    //print("value: ");
     print(value);
-    //print("body: ");
     print(body);
     while (true) {
       try {

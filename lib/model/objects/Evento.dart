@@ -1,8 +1,7 @@
-//OK
 import 'Organizzatore.dart';
 
 class Evento {
-  late int id; //todo vabene questo late?
+  late int id;
   late String nome;
   late String citta;
   late int posti_occupati;

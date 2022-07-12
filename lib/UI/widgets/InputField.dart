@@ -19,7 +19,6 @@ class InputField extends StatelessWidget {
   final TextInputType? keyboardType;
 
 
-  //todo da rendere opzionali
   const InputField({Key? key, this.labelText, this.controller, this.onSubmit, this.isPassword = false, this.isUsername = false, this.enabled = true, this.multiline, this.onChanged, this.onTap, this.maxLength, this.textAlign, this.keyboardType}) : super(key: key);
 
   @override

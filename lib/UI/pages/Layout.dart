@@ -8,7 +8,6 @@ import 'ListaBiglietti.dart';
 import 'Login.dart';
 
 
-//todo forse risolto
 class Layout extends StatefulWidget {
   final String title;
 
@@ -18,10 +17,10 @@ class Layout extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => layoutState;
 
-
+  //setto la mail di chi ha fatto il login
   static void setLogState(String email){
     layoutState.email=email;
-    layoutState.setState((){}); //setLogResult, preso come stringa
+    layoutState.setState((){});
   }
 
 }//Layout
@@ -71,7 +70,7 @@ class _LayoutState extends State<Layout> {
   }
 
   StatefulWidget getChild(){
-    print("Stato del login globale: ");
+    //print("Stato del login globale: ");
     print(LoginState.sharedInstance.getLoginState());
     return LoginState.sharedInstance.getLoginState() != LogInResult.logged?
     Login() : ListaBiglietti(email:email!);

@@ -1,6 +1,6 @@
 import 'package:frontend_ticketstore/model/support/LogInResult.dart';
 
-//todo, verificare se funziona
+//singleton. stato del login condiviso da tutte le componenti grafiche
 class LoginState {
   static LoginState sharedInstance = LoginState();
   LogInResult _loginState = LogInResult.error_wrong_credentials;

@@ -57,7 +57,7 @@ class _SearchState extends State<Search> {
               labelText: "Ricerca evento",
               controller: _searchFiledController,
               onSubmit: (value) {
-                print(_searchFiledController.text); //OK
+                print(_searchFiledController.text);
                 _search();
               },
             ),
@@ -65,7 +65,7 @@ class _SearchState extends State<Search> {
           CircularIconButton(
             icon: Icons.search_rounded,
             onPressed: () {
-              print("IconButton"); //OK
+              //print("IconButton"); //OK
               print(_searchFiledController.text);
               _search();
             },
@@ -117,7 +117,7 @@ class _SearchState extends State<Search> {
       _events = null;
     });
     Model.sharedInstance.searchEvent(_searchFiledController.text).then((result) {
-      print("risultato: ");
+      //print("risultato: ");
       print(result);
       setState(() {
         _searching = false;

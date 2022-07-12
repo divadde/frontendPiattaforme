@@ -2,7 +2,6 @@
 import 'Evento.dart';
 import 'Utente.dart';
 
-//ho cacciato l'id, fare ctrl+z in caso non funzioni
 class Biglietto {
   late String settore;
   late String posto;

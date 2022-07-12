@@ -19,7 +19,7 @@ class TicketCard extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              biglietto.evento.nome, //todo funziona?
+              biglietto.evento.nome,
               style: TextStyle(
                 fontSize: 40,
                 color: Theme.of(context).primaryColor,

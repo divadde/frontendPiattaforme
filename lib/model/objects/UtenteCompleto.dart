@@ -1,5 +1,6 @@
 import 'Utente.dart';
 
+//mi serve per effettuare la registrazione
 class UtenteCompleto {
   Utente utente;
   String username;

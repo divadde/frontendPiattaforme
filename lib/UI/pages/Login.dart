@@ -1,7 +1,5 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:frontend_ticketstore/UI/pages/ListaBiglietti.dart';
 import 'package:frontend_ticketstore/model/support/LoginState.dart';
 import 'package:http/http.dart';
 import '../../model/Model.dart';
@@ -12,7 +10,6 @@ import '../widgets/GenericPopUp.dart';
 import '../widgets/TextInputField.dart';
 import 'Layout.dart';
 
-//todo aggiusta
 class Login extends StatefulWidget{
 
   @override
@@ -42,7 +39,6 @@ class _PersonalAreaState extends State<Login>{
 
   @override
   Widget build(BuildContext context) {
-    print("ciao login");
     return p == page.login?
     LoginPage() : RegistrationPage();
   }
@@ -76,7 +72,7 @@ class _PersonalAreaState extends State<Login>{
                     TextInputField(hint:"password", controller: _controllerPassword,submit: loginS,),
                     IconButton( onPressed: login,
                       icon: Icon(Icons.login, size: 25,),),
-                    Text("oppure"),
+                    Text("Se non sei registrato:"),
                     IconButton(
                       onPressed: () {
                         setState((){p= page.registration;});
@@ -86,7 +82,7 @@ class _PersonalAreaState extends State<Login>{
                           Icons.app_registration
                       ),
                     ),
-                    Text("registrati ora"),
+                    Text("Registrati"),
                   ],
                 ),
               ),
@@ -130,13 +126,13 @@ class _PersonalAreaState extends State<Login>{
                     TextInputField(hint:"eta",controller: _RegcontrollerEta,),
                     TextInputField(hint:"citta",controller: _RegcontrollerCitta,),
                     IconButton(
-                      onPressed: registrati, //todo perché non visualizza?
+                      onPressed: registrati,
                       icon:  Icon(
                           size: 20,
                           Icons.app_registration
                       ),
                     ),
-                    Text("registrati ora"),
+                    Text("Registrati"),
                   ],
                 ),
               ),
@@ -148,12 +144,7 @@ class _PersonalAreaState extends State<Login>{
 
 
   void registrati(){
-    print("pronti a registrarci");
-    /*
-    setState((){
-      p = page.progress;
-    });
-     */
+    //print("pronti a registrarci");
     UtenteCompleto u = UtenteCompleto(
         username: _RegcontrollerUser.text,
         password: _RegcontrollerPass.text,
@@ -167,11 +158,11 @@ class _PersonalAreaState extends State<Login>{
             //id: null
         )
     );
-    Model.sharedInstance.registraUtente(u).then((value) { //todo
-      print("chiamata al model fatta");
+    Model.sharedInstance.registraUtente(u).then((value) {
+      //print("chiamata al model fatta");
       if( value.compareTo("registrazione completata") == 0) {
         setState((){
-          print("registrazione completata!");
+          //print("registrazione completata!");
           _RegcontrollerEta.clear();
           _RegcontrollerCitta.clear();
           _RegcontrollerCogn.clear();

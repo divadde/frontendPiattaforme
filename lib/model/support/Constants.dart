@@ -22,7 +22,6 @@ class Constants {
   static final String REQUEST_USER_BY_MAIL= "/utenti/byMail";
 
 
-
   // states
   static final String STATE_CLUB = "club";
 

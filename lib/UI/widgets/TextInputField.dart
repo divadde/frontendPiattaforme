@@ -26,7 +26,7 @@ class TextInputField extends StatelessWidget{
         child:TextField(
           enabled: true,
           onSubmitted: submit ,
-          obscureText: hint.compareTo("password") == 0, //todo Nick
+          obscureText: hint.compareTo("password") == 0,
           controller: controller,
           //maxLength: 50,
           decoration:  InputDecoration(
